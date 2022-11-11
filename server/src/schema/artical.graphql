@@ -1,0 +1,21 @@
+type Article {
+  id: String!
+  author: String!
+  title: String!
+  content: String!
+  created_at: Float!
+}
+
+type ArticlesCount {
+  articlesCount: Float!
+}
+
+type Mutation {
+  addArticle(author: String!, title: String!, content: String!): [Article]!
+}
+
+type Query {
+  article(id: String!): Article!
+  articles(limit: Float!, offset: Float!): [Article!]!
+  articlesCount: ArticlesCount!
+}

@@ -1,37 +1,29 @@
-/**
- * This is an incomplete script of apollo server. Please
- * make it live with features we requested. :)
- *
- */
+require("dotenv").config();
+import * as fs from "fs";
+import * as path from "path";
+import { ApolloServer } from "apollo-server";
+import { Query, Mutation } from "./resolvers/resolver";
+import orbitDb from "./utils/orbitDb";
 
-require('dotenv').config()
-
-import { ApolloServer, gql } from 'apollo-server'
-
-// init server
 const server = new ApolloServer({
-  cors: {
-    origin: [],
-  },
-  dataSources: () => ({ }),
+  cors: { origin: "*" },
+  dataSources: () => ({}),
   debug: true,
   resolvers: {
-    Query: {},
-    Mutation: {},
+    Query,
+    Mutation,
   },
-  typeDefs: gql`
-    type Article {
-      title: string
-      content: string
-    }
+  typeDefs: fs.readFileSync(
+    path.join(__dirname, "./schema/artical.graphql"),
+    "utf-8"
+  ),
+});
 
-    type Query {
-      articles: [Article]
-    }
-  `,
-})
+async function main() {
+  await orbitDb.startDb();
+  await server
+    .listen({ port: process.env.SERVER_PORT || "3000" })
+    .then(({ url }) => console.log(`Server is ready at ${url}`));
+}
 
-// run server up
-server
-  .listen({ port: '' })
-  .then(({ url }) => console.log(`Server is ready at ${url}`))
+main();
