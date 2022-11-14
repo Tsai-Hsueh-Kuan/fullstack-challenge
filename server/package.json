@@ -7,8 +7,7 @@
     "node": ">=16"
   },
   "scripts": {
-    "start": "ts-node .",
-    "dev": "nodemon",
+    "start": "nodemon",
     "prettier": "npx prettier --write src/."
   },
   "dependencies": {

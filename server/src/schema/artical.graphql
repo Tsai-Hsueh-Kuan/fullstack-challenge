@@ -16,6 +16,6 @@ type Mutation {
 
 type Query {
   article(id: String!): Article!
-  articles(limit: Float!, offset: Float!): [Article!]!
+  articles(limit: Int!, offset: Int!): [Article!]!
   articlesCount: ArticlesCount!
 }

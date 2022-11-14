@@ -5,6 +5,9 @@ export const Query = {
   articles: async (_: any, { limit, offset }: { limit: number; offset: number }) => {
     try {
       const articles = await dbService.getAllArticles();
+      articles.sort((a: any, b: any)=> {
+        return b['created_at'] - a['created_at']
+      })
       return articles.slice(offset, limit + offset);
     } catch (error) {
       console.log("error in articles", error);
@@ -32,6 +35,9 @@ export const Query = {
 export const Mutation = {
   addArticle: async (_: any, args: any) => {
     const { title, content, author } = args;
+    if(!title || !content || !author) {
+      throw new Error('Incomplete information')
+    }
     const article = {
       id: v4(),
       title,
@@ -44,6 +50,7 @@ export const Mutation = {
       return newArticle;
     } catch (error) {
       console.log("error in addArticle", error);
+      return error
     }
   },
 };
