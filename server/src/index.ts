@@ -22,7 +22,7 @@ const server = new ApolloServer({
 async function main() {
   await orbitDb.startDb();
   await server
-    .listen({ port: process.env.SERVER_PORT || "3000" })
+    .listen({ port: process.env.SERVER_PORT || "8000" })
     .then(({ url }) => console.log(`Server is ready at ${url}`));
 }
 
