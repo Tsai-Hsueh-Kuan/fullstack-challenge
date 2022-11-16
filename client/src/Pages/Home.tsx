@@ -146,7 +146,6 @@ const Home = (props: RouteComponentProps) => {
       <Table
         columns={columns}
         dataSource={articles}
-        scroll={{ x: 1300 }}
         pagination={false}
       />
       <div style={{ textAlign: "center", paddingTop: "30px" }}>
