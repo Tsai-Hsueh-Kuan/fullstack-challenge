@@ -12,6 +12,7 @@
 
 # Dependency directories
 node_modules
+yarn.lock
 
 # Output
 build
